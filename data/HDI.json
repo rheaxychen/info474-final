@@ -1430,7 +1430,7 @@
   {
     "": 17,
     "Id": 18,
-    "Country": "Korea (Republic of)",
+    "Country": "Republic of Korea",
     "HDI Rank": 18,
     "HDI": 0.901,
     "Life expectancy": 82.1,
@@ -5714,7 +5714,7 @@
   {
     "": 68,
     "Id": 69,
-    "Country": "Iran (Islamic Republic of)",
+    "Country": "Iran",
     "HDI Rank": 69,
     "HDI": 0.774,
     "Life expectancy": 75.6,
@@ -5966,7 +5966,7 @@
   {
     "": 71,
     "Id": 72,
-    "Country": "Venezuela (Bolivarian Republic of)",
+    "Country": "Venezuela",
     "HDI Rank": 71,
     "HDI": 0.767,
     "Life expectancy": 74.4,
@@ -8906,7 +8906,7 @@
   {
     "": 106,
     "Id": 107,
-    "Country": "Moldova (Republic of)",
+    "Country": "Moldova",
     "HDI Rank": 107,
     "HDI": 0.699,
     "Life expectancy": 71.7,
@@ -9578,7 +9578,7 @@
   {
     "": 114,
     "Id": 115,
-    "Country": "Viet Nam",
+    "Country": "Vietnam",
     "HDI Rank": 115,
     "HDI": 0.683,
     "Life expectancy": 75.9,
@@ -9830,7 +9830,7 @@
   {
     "": 117,
     "Id": 118,
-    "Country": "Bolivia (Plurinational State of)",
+    "Country": "Bolivia",
     "HDI Rank": 118,
     "HDI": 0.674,
     "Life expectancy": 68.7,
@@ -11510,7 +11510,7 @@
   {
     "": 137,
     "Id": 138,
-    "Country": "Lao People's Democratic Republic",
+    "Country": "Lao PDR",
     "HDI Rank": 138,
     "HDI": 0.586,
     "Life expectancy": 66.6,
@@ -12602,7 +12602,7 @@
   {
     "": 150,
     "Id": 151,
-    "Country": "Tanzania (United Republic of)",
+    "Country": "Tanzania",
     "HDI Rank": 151,
     "HDI": 0.531,
     "Life expectancy": 65.5,
@@ -14702,7 +14702,7 @@
   {
     "": 175,
     "Id": 176,
-    "Country": "Congo (Democratic Republic of the)",
+    "Country": "Democratic Republic of the Congo",
     "HDI Rank": 176,
     "HDI": 0.435,
     "Life expectancy": 59.1,
@@ -15794,7 +15794,7 @@
   {
     "": 188,
     "Id": 189,
-    "Country": "Korea (Democratic People's Rep. of)",
+    "Country": "Dem. Rep. Korea",
     "HDI Rank": "",
     "HDI": "",
     "Life expectancy": 70.5,
