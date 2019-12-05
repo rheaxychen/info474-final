@@ -22,101 +22,115 @@ var zoom = d3.zoom()
         map.attr("transform", transform);
     });
 
+var g = svg.append('g');
+
 svg.call(zoom);
-d3.json("../../data/HDI.json", function(jsondata){
-        dataHDI = jsondata
-        drawMap();
-    })
-d3.json("../../data/countries.json", function(jsondata){
-        dataCountries = jsondata;
-    })
 
-// d3.queue()
-//     .defer(d3.json, "../../data/HDI.json", function(jsondata){
+// d3.json("../../data/HDI.json", function(jsondata){
 //         dataHDI = jsondata
-//     })
-//     .defer(d3.json, "../../data/countries.json", function(jsondata){
-//         dataCountries = jsondata;
-//     })
-//     .await(function (error, dataHDI, dataCountries) {
-//         if (error) {
-//             console.error('Oh dear, something went wrong: ' + error);
-//         }
-//         else {
-//             console.log("drawing");
-//             drawMap();
-//         }
-//     });
+//         //drawMap();
+// })
+d3.json("../../data/countries.json", function(d) {
 
-function drawMap() {
-
-    // geoMercator projection
-    var projection = d3.geoMercator() //d3.geoOrthographic()
-        .scale(130)
-        .translate([width / 2, height / 1.5]);
-
-    // geoPath projection
-    var path = d3.geoPath().projection(projection);
-
-    //colors for population metrics
-    var color = d3.scaleThreshold()
-        .domain([10000, 100000, 500000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1500000000])
-        .range(["#f7fcfd", "#e0ecf4", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1", "#88419d", "#810f7c", "#4d004b"]);
-
-    var features = topojson.feature(dataHDI, dataCountries).features;
-    console.log(features);
-    var populationById = {};
-
-    dataCountries.forEach(function (d) {
-        console.log(d);
-        populationById[d.Country] = {
-            total: +d.total,
-            females: +d.females,
-            males: +d.males
-        }
-    });
-    features.forEach(function (d) {
-        d.details = populationById[d.properties.name] ? populationById[d.properties.name] : {};
-    });
-
-    map.append("g")
-        .selectAll("path")
-        .data(features)
-        .enter().append("path")
-        .attr("name", function (d) {
-            return d.properties.name;
+        var geoProj = d3.geoMercator()
+            .scale(150)
+            .rotate([0, 0])
+            .center([0, 42.313])
+            .translate([width/2, height/2]);
+        
+        var geoPath = d3.geoPath()
+            .projection(geoProj);
+        
+        g.selectAll('path')
+            .data(d.features)
+            .enter()
+            .append('path')
+            .attr('fill', '#ccc')
+            .attr('d', geoPath);
+        
+        d3.json("HDI.json", function (d) {
+            g.selectAll('circle')
+                .data(d.features)
+                .enter()
+                .append('path')
+                .attr('fill', 'red')
+                .attr('stroke', '#999')
+                .attr('d', geoPath)
         })
-        .attr("id", function (d) {
-            return d.id;
-        })
-        .attr("d", path)
-        .style("fill", function (d) {
-            return d.details && d.details.total ? color(d.details.total) : undefined;
-        })
-        .on('mouseover', function (d) {
-            d3.select(this)
-                .style("stroke", "white")
-                .style("stroke-width", 1)
-                .style("cursor", "pointer");
+        console.log(dataCountries);
+    })
 
-            d3.select(".country")
-                .text(d.properties.name);
+// function drawMap() {
 
-            d3.select(".females")
-                .text(d.details && d.details.females && "Female " + d.details.females || "¯\\_(ツ)_/¯");
+//     // geoMercator projection
+//     var projection = d3.geoMercator() //d3.geoOrthographic()
+//         .scale(130)
+//         .translate([width / 2, height / 1.5]);
 
-            d3.select(".males")
-                .text(d.details && d.details.males && "Male " + d.details.males || "¯\\_(ツ)_/¯");
+//     // geoPath projection
+//     var path = d3.geoPath().projection(projection);
 
-            d3.select('.details')
-                .style('visibility', "visible")
-        })
-        .on('mouseout', function (d) {
-            d3.select(this)
-                .style("stroke", null)
-                .style("stroke-width", 0.25);
+//     //colors for population metrics
+//     var color = d3.scaleThreshold()
+//         .domain([10000, 100000, 500000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1500000000])
+//         .range(["#f7fcfd", "#e0ecf4", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1", "#88419d", "#810f7c", "#4d004b"]);
 
-            d3.select('.details')
-                .style('visibility', "hidden");
-        });
-    }
+//     // var features = topojson.feature(dataHDI, dataCountries).features;
+//     // //console.log(features);
+//     // var populationById = {};
+
+//     console.log(dataCountries)
+
+//     // dataCountries.forEach(function (d) {
+//     //     console.log(d);
+//     //     populationById[d.Country] = {
+//     //         total: +d.total,
+//     //         females: +d.females,
+//     //         males: +d.males
+//     //     }
+//     // });
+//     // features.forEach(function (d) {
+//     //     d.details = populationById[d.properties.name] ? populationById[d.properties.name] : {};
+//     // });
+
+//     // map.append("g")
+//     //     .selectAll("path")
+//     //     .data(features)
+//     //     .enter().append("path")
+//     //     .attr("name", function (d) {
+//     //         return d.properties.name;
+//     //     })
+//     //     .attr("id", function (d) {
+//     //         return d.id;
+//     //     })
+//     //     .attr("d", path)
+//     //     .style("fill", function (d) {
+//     //         return d.details && d.details.total ? color(d.details.total) : undefined;
+//     //     })
+//     //     .on('mouseover', function (d) {
+//     //         d3.select(this)
+//     //             .style("stroke", "white")
+//     //             .style("stroke-width", 1)
+//     //             .style("cursor", "pointer");
+
+//     //         d3.select(".country")
+//     //             .text(d.properties.name);
+
+//     //         d3.select(".females")
+//     //             .text(d.details && d.details.females && "Female " + d.details.females || "¯\\_(ツ)_/¯");
+
+//     //         d3.select(".males")
+//     //             .text(d.details && d.details.males && "Male " + d.details.males || "¯\\_(ツ)_/¯");
+
+//     //         d3.select('.details')
+//     //             .style('visibility', "visible")
+//     //     })
+//     //     .on('mouseout', function (d) {
+//     //         d3.select(this)
+//     //             .style("stroke", null)
+//     //             .style("stroke-width", 0.25);
+
+//     //         d3.select('.details')
+//     //             .style('visibility', "hidden");
+//     //     });
+//     }
