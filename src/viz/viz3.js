@@ -38,10 +38,8 @@ d3.json("../../data/countries.json", function(d) {
         // console.log(d);
         d.features.forEach(function (p) {
             console.log(p.geometry);
-            populationById[p.Country] = {
-                total: +d.total,
-                females: +d.females,
-                males: +d.males
+            populationById[p.properties.subunit] = {
+                geometry: +p.geometry
             }
         });
         var geoProj = d3.geoMercator()
@@ -60,18 +58,19 @@ d3.json("../../data/countries.json", function(d) {
             .attr('fill', '#ccc')
             .attr('d', geoPath);
         
-        d3.json("../../data/HDI.json", function (d) {
-            console.log(d[0].Country)
-            g.selectAll('circle')
-                .data(d.Country)
-                // .enter()
-                // .append('path')
-                // .attr('fill', 'red')
-                // .attr('stroke', '#999')
-                // .attr('d', geoPath)
-        })
+        
         
     })
+// console.log(populationById)
+d3.json("../../data/HDI.json", function (d) {
+            // console.log(d[0].Country)
+            d.forEach(function (p) {
+                // console.log(p.Country)
+                populationById[p.Country] = {
+                    HDI: +p.HDI
+                }
+            })
+        })
 
 // function drawMap() {
 
