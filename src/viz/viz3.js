@@ -30,8 +30,20 @@ svg.call(zoom);
 //         dataHDI = jsondata
 //         //drawMap();
 // })
-d3.json("../../data/countries.json", function(d) {
+// console.log(dataHDI);
 
+var populationById = {};
+
+d3.json("../../data/countries.json", function(d) {
+        // console.log(d);
+        d.features.forEach(function (p) {
+            console.log(p.geometry);
+            populationById[p.Country] = {
+                total: +d.total,
+                females: +d.females,
+                males: +d.males
+            }
+        });
         var geoProj = d3.geoMercator()
             .scale(150)
             .rotate([0, 0])
@@ -48,16 +60,17 @@ d3.json("../../data/countries.json", function(d) {
             .attr('fill', '#ccc')
             .attr('d', geoPath);
         
-        d3.json("HDI.json", function (d) {
+        d3.json("../../data/HDI.json", function (d) {
+            console.log(d[0].Country)
             g.selectAll('circle')
-                .data(d.features)
-                .enter()
-                .append('path')
-                .attr('fill', 'red')
-                .attr('stroke', '#999')
-                .attr('d', geoPath)
+                .data(d.Country)
+                // .enter()
+                // .append('path')
+                // .attr('fill', 'red')
+                // .attr('stroke', '#999')
+                // .attr('d', geoPath)
         })
-        console.log(dataCountries);
+        
     })
 
 // function drawMap() {
