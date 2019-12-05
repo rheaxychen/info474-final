@@ -1,7 +1,7 @@
 // Modified from amazing Youtube Tutorial https://www.youtube.com/watch?v=045-bsOsbJc
 
-var dataHDI = 'no data';
-var dataCountries = 'no data';
+var hdi = 'no data';
+var countriesData = 'no data';
 
 var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
     height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -32,18 +32,19 @@ svg.call(zoom);
 // })
 // console.log(dataHDI);
 
-var populationById = {};
+var populationById = [];
 
-d3.json("../../data/countries.json", function(d) {
-        // console.log(d);
-        d.features.forEach(function (p) {
-            console.log(p.geometry);x
-            populationById[p.Country] = {
-                total: +d.total,
-                females: +d.females,
-                males: +d.males
-            }
-        });
+var color = d3.scaleQuantile()
+    .range(["rgb(237, 248, 233)", "rgb(186, 228, 179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"])
+    .domain([0,1]);
+
+ d3.json("../../data/HDI.json", function (data) {
+    HDIdata = data;
+    console.log(HDIdata)
+
+    d3.json("../../data/countries.json", function(d) {
+        countriesData = d;
+        
         var geoProj = d3.geoMercator()
             .scale(150)
             .rotate([0, 0])
@@ -59,21 +60,67 @@ d3.json("../../data/countries.json", function(d) {
             .append('path')
             .attr('fill', '#ccc')
             .attr('d', geoPath);
-        
-        d3.json("../../data/HDI.json", function (d) {
-            console.log(d[0].Country)
-            console.log(d[0].HDI)
-            g.selectAll('circle')
-                .data(d.Country)
-                // .enter()
-                // .append('path')
-                // .attr('fill', 'red')
-                // .attr('stroke', '#999')
-                // .attr('d', geoPath)
-        })
 
+        console.log(countriesData.features)
+        
+        for(var i = 0; i < HDIdata.length; i++){
+            let country = HDIdata[i].Country;
+    
+            let data = countriesData.features.length;
+            
+    
+            for(var n = 0; n < data; n++){
+                let countryJSON = countriesData.features[n].properties.subunit;
+                if(country === countryJSON) {
+                    populationById.push({
+                        Country: country,
+                        Coordinates: countriesData.features[n].geometry.coordinates,
+                        HDI: HDIdata[i].HDI
+                    })
+                }
+            }
+        }
+        
+        svg.selectAll("path")
+          .data(populationById)
+          .enter()
+          .append("path")
+          .attr("d", path)
+          .style("fill", function(d){
+            //get the data value
+            var value = d.HDI
+
+            if(value){
+              //If value exists
+              return color(value);
+            } else {
+              // If value is undefined
+              //we do this because alaska and hawaii are not in dataset we are using but still in projections
+              return "#ccc"
+            }
+
+          });
         
     })
+
+    
+    
+ })
+
+
+// d3.json("../../data/HDI.json", function (d) {
+//             let i = 0;
+//             // console.log(d[0].Country)
+//             d.forEach(function (p) {
+//                 if(populationById[i] == p.country) {
+//                     populationById[i] = {
+                        
+//                     }
+//                 }
+//             })
+//         })
+
+        console.log(populationById)
 
 // function drawMap() {
 
