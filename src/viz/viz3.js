@@ -37,7 +37,7 @@ var populationById = {};
 d3.json("../../data/countries.json", function(d) {
         // console.log(d);
         d.features.forEach(function (p) {
-            console.log(p.geometry);
+            console.log(p.geometry);x
             populationById[p.Country] = {
                 total: +d.total,
                 females: +d.females,
@@ -62,6 +62,7 @@ d3.json("../../data/countries.json", function(d) {
         
         d3.json("../../data/HDI.json", function (d) {
             console.log(d[0].Country)
+            console.log(d[0].HDI)
             g.selectAll('circle')
                 .data(d.Country)
                 // .enter()
@@ -70,6 +71,7 @@ d3.json("../../data/countries.json", function(d) {
                 // .attr('stroke', '#999')
                 // .attr('d', geoPath)
         })
+
         
     })
 
