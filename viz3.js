@@ -20,8 +20,8 @@ var map = svg.append("g")
     .attr("class", "map");
 
 d3.queue()
-    .defer(d3.json, "./data/countries_topo.json")
-    .defer(d3.json, "./data/HDI.json")
+    .defer(d3.json, "../../data/countries_topo.json")
+    .defer(d3.json, "../../data/HDI.json")
     .await(function (error, world, data) {
         if (error) {
             console.error('Oh dear, something went wrong: ' + error);
@@ -46,6 +46,8 @@ function drawMap(world, data) {
     var color = d3.scaleThreshold()
         .domain([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.85, 0.90, 0.95])
         .range(["#f7fcfd", "#e0ecf4", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1", "#88419d", "#810f7c", "#4d004b"]);
+
+        
 
     var features = topojson.feature(world, world.objects.countries).features;
     
@@ -89,7 +91,8 @@ function drawMap(world, data) {
                 .style("cursor", "pointer");
 
             d3.select(".country")
-                .text( d.details && d.details["Overall HDI"] &&  d.properties.name_long + "\n" + d.details["Overall HDI"] || "¯\\_(ツ)_/¯");
+                // .text(d.properties.name_long)
+                .text(d.details && d.details["Overall HDI"] && d.properties.name_long + "\n" + d.details["Overall HDI"] || "¯\\_(ツ)_/¯");
 
             d3.select(".females")
                 .text(d.details && d.details["Female HDI"] && "Female HDI " + d.details["Female HDI"] || "¯\\_(ツ)_/¯");
