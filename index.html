@@ -1,60 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>INFO 474 Final Project</title>
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            color: #444444;
+            font-weight: 100;
+        }
+        body {
+            background-color: #B5D3E7;
+            margin: 0px;
+        }
+        path {
+            stroke: white;
+            stroke-width: 0.25px;
+            fill: #808080;
+        }
+        .details {
+            top: 0px;
+            visibility: hidden;
+            width: 300px;
+            padding: 30px;
+            height: 100%;
+            opacity: 0.4;
+            position: absolute;
+            background-color: aliceblue;
+            font-size: 50px;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>INFO 474 Final Project - Autumn 2019</title>
-</head>
-<h1>
-	Welcome to group 6's presentation!
-</h1>
-<h2>
-	Dataset:
-</h2>
-<h3>
-		https://catalog.data.gov/dataset?res_format=GeoJSON
-<br>
-		https://www.kaggle.com/sudhirnl7/human-development-index-hdi#Continent_HDI.csv - human development report
-<br>
-<p>
-		We decided to choose this dataset because it gives a lot of information about years of schooling, human development, gross national income per capita, population data, etc. which we think are critical factors in understanding a country’s development. The dataset also provides this information for two genders: male and female. We feel that this information is essential to compare potential gender inequalities. We also think that it might be important to see the relations between life expectancy and the country’s total population.  This visualization could further help us find and understand the optimal population to maintain, resulting in the highest life expectancy value. 
+  <body>
+        <h1 class="center">Distribution of HDI level across the country</h1>
 
-</p>
+        <div class="details">
+            <h2 class="country"></h2>
+            <p class="females"></p>
+            <p class="males"></p>
+        </div>
 
-		
-</h3>
-<body>
-	<ul>
-		<li>
-				<h2>Viz 1</h2> <br>
-			<a href="https://mparakh-1662688.github.io/project-info474/">D3 #1</a></li>
-		<br>
-		
-		<li>
-				<h2>Viz 2</h2> <br>
-			<a href="https://hansol9718.github.io/final-474/">D3 #2</a></li>
-		<br>
-		
-		<li>
-				<h2>Viz 3</h2> <br>
-			<a href="src/viz//viz3.html">D3 #3</a></li>
-		<br>
-		<li>
-			<h2>Viz 4</h2> <br>
-				This viz shows the relationship between the percentage of internet users and the estimated gross national income per capita for females in specific countries. The color shows the share of seats held by women in parliament.
-		<div class='tableauPlaceholder' id='viz1575530892565' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IN&#47;INFO474&#47;tool&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='INFO474&#47;tool' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IN&#47;INFO474&#47;tool&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1575530892565');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-		</li>
-		<br>
-		<li>
-				<h2>Viz 5</h2> <br>
-				This visualization shows the relationship between mean years of school and gross national income per capita for specific countries.
-			<div class='tableauPlaceholder' id='viz1575563071522' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;vi&#47;vis1_15755243856440&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='vis1_15755243856440&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;vi&#47;vis1_15755243856440&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1575563071522');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-		</li>
-	</ul>
-
-</body>
-<script src="./index.js"></script>
-
+        <script src='https://d3js.org/d3.v4.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.js"></script>
+        <script src="./viz3.js"></script>
+  </body>
 </html>
