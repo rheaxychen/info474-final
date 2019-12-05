@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>INFO 474 Final Project</title>
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            color: #444444;
+            font-weight: 100;
+        }
+        body {
+            background-color: #B5D3E7;
+            margin: 0px;
+        }
+        path {
+            stroke: white;
+            stroke-width: 0.25px;
+            fill: #808080;
+        }
+        .details {
+            top: 0px;
+            visibility: hidden;
+            width: 300px;
+            padding: 30px;
+            height: 100%;
+            opacity: 0.4;
+            position: absolute;
+            background-color: aliceblue;
+            font-size: 50px;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+  </head>
+
+  <body>
+        <h1 class="center">Distribution of HDI level across the country</h1>
+
+        <script src='https://d3js.org/d3.v4.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.js"></script>
+        <script src="./viz3.js"></script>
+  </body>
+</html>
