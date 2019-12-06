@@ -20,8 +20,8 @@ var map = svg.append("g")
     .attr("class", "map");
 
 d3.queue()
-    .defer(d3.json, "../../data/countries_topo.json")
-    .defer(d3.json, "../../data/HDI.json")
+    .defer(d3.json, "./data/countries_topo.json")
+    .defer(d3.json, "./data/HDI.json")
     .await(function (error, world, data) {
         if (error) {
             console.error('Oh dear, something went wrong: ' + error);
@@ -52,7 +52,7 @@ function drawMap(world, data) {
     var features = topojson.feature(world, world.objects.countries).features;
     
     var populationById = {};
-    console.log(data)
+    // console.log(data)
 
     data.forEach(function (d) {
         // console.log(d["Human Development Index (HDI) Female"])
@@ -63,7 +63,7 @@ function drawMap(world, data) {
         }
     });
 
-    console.log(populationById)
+    // console.log(populationById)
 
     features.forEach(function (d) {
         d.details = populationById[d.properties.name_long] ? populationById[d.properties.name_long] : {};
